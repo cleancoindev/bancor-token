@@ -70,6 +70,70 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Destruction",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Issuance",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "IssuanceByBancor",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_prevOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnerUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "_from",
@@ -90,6 +154,13 @@
 				],
 				"name": "Transfer",
 				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "acceptOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -173,7 +244,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "cw",
+				"name": "conversionFee",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "conversionWeight",
 				"outputs": [
 					{
 						"internalType": "uint32",
@@ -200,12 +284,60 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "destroy",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "_amount",
 						"type": "uint256"
 					}
 				],
 				"name": "issue",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "issueByBancor",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -231,6 +363,45 @@
 			},
 			{
 				"inputs": [],
+				"name": "newOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "reserveBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "reserveToken",
 				"outputs": [
 					{
@@ -240,6 +411,45 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_bancorFormula",
+						"type": "address"
+					}
+				],
+				"name": "setBancorFormula",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_conversionFee",
+						"type": "uint32"
+					}
+				],
+				"name": "setConversionFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_conversionWeight",
+						"type": "uint32"
+					}
+				],
+				"name": "setConversionWeight",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -320,11 +530,34 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"acceptOwnership()": {
+					"details": "used by a new owner to accept an ownership transfer"
+				},
+				"transferOwnership(address)": {
+					"details": "allows transferring the contract ownership the new owner still needs to accept the transfer can only be called by the contract owner",
+					"params": {
+						"_newOwner": "new contract owner"
+					}
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -333,8 +566,26 @@
 				"approve(address,uint256)": {
 					"notice": "授权"
 				},
-				"issue(uint256)": {
+				"destroy(address,uint256)": {
+					"notice": "销毁代币"
+				},
+				"issue(address,uint256)": {
+					"notice": "发行代币"
+				},
+				"issueByBancor(uint256)": {
 					"notice": "使用bancor公式发行代币: 1. 用户首先先授权给bancorToken指定_amount金额 2. 调用bancorToken.issue方法发行token"
+				},
+				"reserveBalance()": {
+					"notice": "查询当前储备代币金额"
+				},
+				"setBancorFormula(address)": {
+					"notice": "设置bancor协议相关内容: 设置bancor公式地址"
+				},
+				"setConversionFee(uint32)": {
+					"notice": "设置bancor协议相关内容: 设置手续费"
+				},
+				"setConversionWeight(uint32)": {
+					"notice": "设置bancor协议相关内容: 设置CW"
 				},
 				"transfer(address,uint256)": {
 					"notice": "转账"
@@ -362,12 +613,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/contracts/token/BancorToken.sol": {
-			"keccak256": "0xdfab3843643736d3aec16fc8d74ed16133140a0d93e05729b240389f6fad79f9",
+		"localhost/contracts/bancor/IBancorFormula.sol": {
+			"keccak256": "0xf30c95034af4c4ec6e8a859e90cf7a0bada29a805ede76e04644107a7c677c4e",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://01fc3d5249fe3af240375d0006b5551d3d026148e9b86c1452483c9feb5ff041",
-				"dweb:/ipfs/QmXCUmPeustYQDc1r7HBFsUmcRJjDmPWmzArGvoT5P6YjL"
+				"bzz-raw://b48070d4abf9c4a08c39e6c494fa9efd7389aa7f8b61b283c9ba02062b1c59b6",
+				"dweb:/ipfs/Qme6U7SpspFPzMH2mTyKsXCnJEAgg1vX6NNFzuykbVSY5R"
+			]
+		},
+		"localhost/contracts/token/BancorToken.sol": {
+			"keccak256": "0x7829771bbd9d967e07c6e3d2b347a080ee76f7cfa7feb9839a462206c272154e",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://0a8634a4904b47fdf2a45a0b3893898c2ed8ffa95b2e3f30592d69078f3eebcd",
+				"dweb:/ipfs/QmbQqeBtFqFN3LAQhkGGSQcaND151ua1EPHCm8zkkLVmS9"
+			]
+		},
+		"localhost/contracts/token/interfaces/IBancorToken.sol": {
+			"keccak256": "0xb36bf3360f980405dd315b8b87dc1c6de3ae809841835f601a36fa9aec2d55a8",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://6fb8c489529376160b8067fe6b6fdb3fddc96f595d600e35020491aa6d64ca6b",
+				"dweb:/ipfs/QmdNKx5VCHrbicBTsT4d8JR86GufPFWGFDj5FKb9dV3Dv7"
 			]
 		},
 		"localhost/contracts/token/interfaces/IERC20Token.sol": {
@@ -376,6 +643,14 @@
 			"urls": [
 				"bzz-raw://31538a36becc69e5acaf096d859cb9ea47ba3a045b2baeba07016d3e2d0fc6bf",
 				"dweb:/ipfs/QmXVnFpwiPr65JRkwUwuzo3brb26UXN4oYZiNmE9p85D3E"
+			]
+		},
+		"localhost/contracts/utility/Owned.sol": {
+			"keccak256": "0x938909a4f77a5e5ed9593ff946baa64b91adaa4245c3ab08f78b1dfbadbd87f5",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://970aa9b3cb8408e15d1baa0f4fc2350caa61d9a825c5b28faa5bfdd8d9932a8a",
+				"dweb:/ipfs/QmVTtcidpEQUHBQmmUwMjmSXGM32uKHJkKLyi5euWMJh4X"
 			]
 		},
 		"localhost/contracts/utility/SafeMath.sol": {
@@ -392,6 +667,14 @@
 			"urls": [
 				"bzz-raw://e1047d58aebac179c66b36fc9af9651fb7959f92e662b8e2f34d786137c0b275",
 				"dweb:/ipfs/QmNVBZEcM4ktv3KZqtugpunweWRqdaEJsTmQwUdXzxZWEg"
+			]
+		},
+		"localhost/contracts/utility/interfaces/IOwned.sol": {
+			"keccak256": "0x3ed39ee6056a8f87de85efb18bcd649d560d6b1515fc3a7fda17c2cdc9f39df8",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://493d7581be76dff6fba2824626bc1b615e4d2860c17721894db7b27bec23fbef",
+				"dweb:/ipfs/QmNgBQPkzM5x4Z3Xj9wNQd1d6PPLw6gx9h1FPbGbqiWhyi"
 			]
 		}
 	},
