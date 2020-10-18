@@ -16,13 +16,43 @@
    c: 投票周期结束，合约管理员公示投票: publicizeVote
 
 
+### 部署合约
+
+a. 安装`truffle`
+
+版本信息如下:
+
+```
+Truffle v5.1.48 (core: 5.1.48)
+Solidity - 0.6.12 (solc-js)
+Node v11.10.1
+Web3.js v1.2.1
+```
+
+b. 编译合约
+
+```
+truffle compile
+```
+
+c. 部署合约
+
+修改.env文件中MNEMONIC内容
+
+```
+truffle migrate --network kovan --skip-dry-run
+```
+
+
+
+
 ### Kovan测试地址
 
 BancorFormula: 0x55a836217EB3888dbfC5b40789a8bd1Df808453a
 
 稳定币测试地址: 0xc277D918BFea177EfFB5330eD857F13f6d262c40
 
-PriceOracle: 0x0857C7bcBA35E88341936F68Ab66Ad761b12376e
+PriceOracle: 0x8ff1422580c9Cf9daf663Ab20EedDaD3486a2b1E
 
 BancorToken地址： 0xdceB1CD8819Af07AD6dc83D847Baee36bA96EB52
     参数: _name: BT
@@ -36,7 +66,7 @@ BancorToken地址： 0xdceB1CD8819Af07AD6dc83D847Baee36bA96EB52
 BancorToken.init:
     参数: _cm: 0xe45217628722E522AdA72A2597cE8D8714395074
          _fm: 0xe45217628722E522AdA72A2597cE8D8714395074
-         _oracle: 0x0857C7bcBA35E88341936F68Ab66Ad761b12376e
+         _oracle: 0x8ff1422580c9Cf9daf663Ab20EedDaD3486a2b1E
          _bancorFormula: 0x55a836217EB3888dbfC5b40789a8bd1Df808453a
          _votePeriodblock: 2000
          _voteOpposeRate: 75
