@@ -1,10 +1,16 @@
 /* eslint-env node */
 /* global artifacts */
 
+
 const BancorToken = artifacts.require('BancorToken');
 
-function deployContracts(deployer) {
-  deployer.deploy(BancorToken);
-}
+const BancorToken = artifacts.require('BancorToken');
 
-module.exports = deployContracts;
+const Web3 = require("web3");
+
+module.exports = function (deployer, network, accounts) {
+  const fromAccount = accounts[0];
+  return deployer.deploy(DevPolyToken, {
+    from: fromAccount
+  }).then(() => {});
+};

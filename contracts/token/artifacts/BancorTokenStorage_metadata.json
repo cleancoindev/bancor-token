@@ -1,0 +1,477 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_prevOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnerUpdate",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "acceptOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bancorFormula",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractManager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "conversionFee",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "conversionWeight",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentVoteId",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "expectPrivateReserveToken",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "financialManager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "initialize",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "newOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "oracleAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "reserveToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_bancorFormula",
+						"type": "address"
+					}
+				],
+				"name": "setBancorFormula",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_contractManager",
+						"type": "address"
+					}
+				],
+				"name": "setContractManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_conversionFee",
+						"type": "uint32"
+					}
+				],
+				"name": "setConversionFee",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_conversionWeight",
+						"type": "uint32"
+					}
+				],
+				"name": "setConversionWeight",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_expectPrivateReserveToken",
+						"type": "uint32"
+					}
+				],
+				"name": "setExpectPrivateReserveToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_financialManager",
+						"type": "address"
+					}
+				],
+				"name": "setFinancialManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_oracleAddress",
+						"type": "address"
+					}
+				],
+				"name": "setOracleAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"name": "voteDetail",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "beginBlock",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endBlock",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalOppose",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "publicity",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "pass",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "voteList",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "voteOpposeRate",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "votePeriodBlock",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"acceptOwnership()": {
+					"details": "used by a new owner to accept an ownership transfer"
+				},
+				"transferOwnership(address)": {
+					"details": "allows transferring the contract ownership the new owner still needs to accept the transfer can only be called by the contract owner",
+					"params": {
+						"_newOwner": "new contract owner"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"setBancorFormula(address)": {
+					"notice": "设置bancor协议相关内容: 设置bancor公式地址"
+				},
+				"setContractManager(address)": {
+					"notice": "设置合约管理员"
+				},
+				"setConversionFee(uint32)": {
+					"notice": "设置bancor协议相关内容: 设置手续费"
+				},
+				"setConversionWeight(uint32)": {
+					"notice": "设置bancor协议相关内容: 设置CW"
+				},
+				"setExpectPrivateReserveToken(uint32)": {
+					"notice": "设置预期私募Token数"
+				},
+				"setFinancialManager(address)": {
+					"notice": "设置财务管理员"
+				},
+				"setOracleAddress(address)": {
+					"notice": "设置oracle地址: 合约Owner修改"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/token/BancorTokenStorage.sol": "BancorTokenStorage"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/token/BancorTokenStorage.sol": {
+			"keccak256": "0x294ba2448db982364a69a991a840a364a1e9c6c9384e7aff31be6f6ab908a7a6",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://e4453472645bf96d0a9143345ec7a3284e5f27a3d805be9a3a956b49eea56f08",
+				"dweb:/ipfs/QmYKA7CVSt2b1QDTtxNfnY9bjpPqwDuca22MaTq2jeFUCS"
+			]
+		},
+		"localhost/contracts/utility/Owned.sol": {
+			"keccak256": "0x938909a4f77a5e5ed9593ff946baa64b91adaa4245c3ab08f78b1dfbadbd87f5",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://970aa9b3cb8408e15d1baa0f4fc2350caa61d9a825c5b28faa5bfdd8d9932a8a",
+				"dweb:/ipfs/QmVTtcidpEQUHBQmmUwMjmSXGM32uKHJkKLyi5euWMJh4X"
+			]
+		},
+		"localhost/contracts/utility/Utils.sol": {
+			"keccak256": "0xeb7395be2ee5a71b1c75fa33db68399583bbadb90bf53a9ca46b3c7626a9bef0",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://5541d8e9c5a5ad540da0ca66ece5c0c60f5584817a4b4c0576ba901b9c6b3fcf",
+				"dweb:/ipfs/QmY23LamgZkSwzV3dZ1AW56GXFV8MfSCaVk5MJygm8VnXk"
+			]
+		},
+		"localhost/contracts/utility/interfaces/IOwned.sol": {
+			"keccak256": "0x3ed39ee6056a8f87de85efb18bcd649d560d6b1515fc3a7fda17c2cdc9f39df8",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://493d7581be76dff6fba2824626bc1b615e4d2860c17721894db7b27bec23fbef",
+				"dweb:/ipfs/QmNgBQPkzM5x4Z3Xj9wNQd1d6PPLw6gx9h1FPbGbqiWhyi"
+			]
+		}
+	},
+	"version": 1
+}

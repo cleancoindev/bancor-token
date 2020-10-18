@@ -106,6 +106,12 @@
 						"internalType": "uint256",
 						"name": "_amount",
 						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_fee",
+						"type": "uint256"
 					}
 				],
 				"name": "IssuanceByBancor",
@@ -153,6 +159,56 @@
 					}
 				],
 				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_block",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "_voteId",
+						"type": "uint32"
+					}
+				],
+				"name": "VoteCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_block",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "_voteId",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "_pass",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "VotePublicize",
 				"type": "event"
 			},
 			{
@@ -244,6 +300,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "contractManager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "conversionFee",
 				"outputs": [
 					{
@@ -258,6 +327,26 @@
 			{
 				"inputs": [],
 				"name": "conversionWeight",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createVote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentVoteId",
 				"outputs": [
 					{
 						"internalType": "uint32",
@@ -306,19 +395,77 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "expectPrivateReserveToken",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "financialManager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_to",
+						"name": "_cm",
 						"type": "address"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "_fm",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_oracle",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_bancorFormula",
+						"type": "address"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_votePeriodblock",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_voteOpposeRate",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_expectPrivateReserveToken",
+						"type": "uint32"
 					}
 				],
-				"name": "issue",
+				"name": "init",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "initialize",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -326,14 +473,14 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_amount",
+						"name": "_usdt",
 						"type": "uint256"
 					}
 				],
@@ -376,6 +523,26 @@
 			},
 			{
 				"inputs": [],
+				"name": "opposeVote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "oracleAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -385,6 +552,13 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "publicizeVote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -429,6 +603,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_contractManager",
+						"type": "address"
+					}
+				],
+				"name": "setContractManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint32",
 						"name": "_conversionFee",
 						"type": "uint32"
@@ -448,6 +635,45 @@
 					}
 				],
 				"name": "setConversionWeight",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "_expectPrivateReserveToken",
+						"type": "uint32"
+					}
+				],
+				"name": "setExpectPrivateReserveToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_financialManager",
+						"type": "address"
+					}
+				],
+				"name": "setFinancialManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_oracleAddress",
+						"type": "address"
+					}
+				],
+				"name": "setOracleAddress",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -543,6 +769,102 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "undoOpposeVote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"name": "voteDetail",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "beginBlock",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endBlock",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalOppose",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "publicity",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "pass",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "voteList",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "voteOpposeRate",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "votePeriodBlock",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -566,20 +888,32 @@
 				"approve(address,uint256)": {
 					"notice": "授权"
 				},
+				"createVote()": {
+					"notice": "开启投票: 条件: 1. 募集金额 >= 预期金额 2. 上一次投票已公示"
+				},
 				"destroy(address,uint256)": {
 					"notice": "销毁代币"
 				},
-				"issue(address,uint256)": {
-					"notice": "发行代币"
+				"init(address,address,address,address,uint32,uint32,uint32)": {
+					"notice": "初始化合约: 1. 合约管理员地址 2. 财务管理员地址 3. oralce地址 4. BancorFormula地址 5. 投票周期 6. 投票反对百分比 7. 预期募集Token数量"
 				},
 				"issueByBancor(uint256)": {
-					"notice": "使用bancor公式发行代币: 1. 用户首先先授权给bancorToken指定_amount金额 2. 调用bancorToken.issue方法发行token"
+					"notice": "使用bancor公式发行代币: 1. 用户首先先授权给bancorToken指定_amount金额 2. 调用bancorToken.issueByBancor方法发行token"
+				},
+				"opposeVote()": {
+					"notice": "持币人投反对票 条件: 1. 投票已开启 2. 投票未结束"
+				},
+				"publicizeVote()": {
+					"notice": "公示投票: 条件: 1. 投票已结束 2. 投票未公示"
 				},
 				"reserveBalance()": {
-					"notice": "查询当前储备代币金额"
+					"notice": "查询当前储备金数量"
 				},
 				"setBancorFormula(address)": {
 					"notice": "设置bancor协议相关内容: 设置bancor公式地址"
+				},
+				"setContractManager(address)": {
+					"notice": "设置合约管理员"
 				},
 				"setConversionFee(uint32)": {
 					"notice": "设置bancor协议相关内容: 设置手续费"
@@ -587,11 +921,23 @@
 				"setConversionWeight(uint32)": {
 					"notice": "设置bancor协议相关内容: 设置CW"
 				},
+				"setExpectPrivateReserveToken(uint32)": {
+					"notice": "设置预期私募Token数"
+				},
+				"setFinancialManager(address)": {
+					"notice": "设置财务管理员"
+				},
+				"setOracleAddress(address)": {
+					"notice": "设置oracle地址: 合约Owner修改"
+				},
 				"transfer(address,uint256)": {
 					"notice": "转账"
 				},
 				"transferFrom(address,address,uint256)": {
 					"notice": "授权转账"
+				},
+				"undoOpposeVote()": {
+					"notice": "持币人撤销投反对票 条件: 1. 投票已开启 2. 投票未结束 3. 持币人已投票"
 				}
 			},
 			"version": 1
@@ -622,19 +968,27 @@
 			]
 		},
 		"localhost/contracts/token/BancorToken.sol": {
-			"keccak256": "0x7829771bbd9d967e07c6e3d2b347a080ee76f7cfa7feb9839a462206c272154e",
+			"keccak256": "0x4c2cd163a3adcd88cd288681241249c4bd94c9f5d52abc4711ee2201134bd80b",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://0a8634a4904b47fdf2a45a0b3893898c2ed8ffa95b2e3f30592d69078f3eebcd",
-				"dweb:/ipfs/QmbQqeBtFqFN3LAQhkGGSQcaND151ua1EPHCm8zkkLVmS9"
+				"bzz-raw://72465f463380a4c06c1ac827005b4d852288c1e60913bcb64f0327fbb374e0c0",
+				"dweb:/ipfs/QmRNSfUMtgD7wEjUwE8zScCMrwdC8UnNgotKfTNoRFKAAH"
+			]
+		},
+		"localhost/contracts/token/BancorTokenStorage.sol": {
+			"keccak256": "0x294ba2448db982364a69a991a840a364a1e9c6c9384e7aff31be6f6ab908a7a6",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://e4453472645bf96d0a9143345ec7a3284e5f27a3d805be9a3a956b49eea56f08",
+				"dweb:/ipfs/QmYKA7CVSt2b1QDTtxNfnY9bjpPqwDuca22MaTq2jeFUCS"
 			]
 		},
 		"localhost/contracts/token/interfaces/IBancorToken.sol": {
-			"keccak256": "0xb36bf3360f980405dd315b8b87dc1c6de3ae809841835f601a36fa9aec2d55a8",
+			"keccak256": "0xca0e6ae2534855723632850b92b57b4ecc259066518b21f07c779a9ec2ea1874",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://6fb8c489529376160b8067fe6b6fdb3fddc96f595d600e35020491aa6d64ca6b",
-				"dweb:/ipfs/QmdNKx5VCHrbicBTsT4d8JR86GufPFWGFDj5FKb9dV3Dv7"
+				"bzz-raw://10fbe9cc3f0ca206a180aab36e8e2f2868143d9ec510d439adcedddadb58033d",
+				"dweb:/ipfs/QmP8kgvaVz7dcF7FMUHmgAYq17SNCPrg7EYG8NUeXo387e"
 			]
 		},
 		"localhost/contracts/token/interfaces/IERC20Token.sol": {
@@ -653,6 +1007,14 @@
 				"dweb:/ipfs/QmVTtcidpEQUHBQmmUwMjmSXGM32uKHJkKLyi5euWMJh4X"
 			]
 		},
+		"localhost/contracts/utility/ReentrancyGuard.sol": {
+			"keccak256": "0x2ebe708e1f408f9ff75605cfcd3034005a3f5dfa32ec7903f5c95b9affa3508a",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://27ae82c47f20995763ff19ebed1e2e4381988b20dba7cc0dabc3cb9e95e68077",
+				"dweb:/ipfs/QmegEq7LY568yCaKK4ZwaPZVdnCbbaJvLxWsSgvpHj45UE"
+			]
+		},
 		"localhost/contracts/utility/SafeMath.sol": {
 			"keccak256": "0x21d065313cbc0a1ce9a84f453e87efd0a7c26ca6439676ba586bb533a89d62d3",
 			"license": "SEE LICENSE IN LICENSE",
@@ -662,11 +1024,19 @@
 			]
 		},
 		"localhost/contracts/utility/Utils.sol": {
-			"keccak256": "0xc86e2c81961343dede0eec4e3e4aac6fd289628325c45fc50f8e10f4e63e4eee",
+			"keccak256": "0xeb7395be2ee5a71b1c75fa33db68399583bbadb90bf53a9ca46b3c7626a9bef0",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://e1047d58aebac179c66b36fc9af9651fb7959f92e662b8e2f34d786137c0b275",
-				"dweb:/ipfs/QmNVBZEcM4ktv3KZqtugpunweWRqdaEJsTmQwUdXzxZWEg"
+				"bzz-raw://5541d8e9c5a5ad540da0ca66ece5c0c60f5584817a4b4c0576ba901b9c6b3fcf",
+				"dweb:/ipfs/QmY23LamgZkSwzV3dZ1AW56GXFV8MfSCaVk5MJygm8VnXk"
+			]
+		},
+		"localhost/contracts/utility/interfaces/IOracle.sol": {
+			"keccak256": "0x1734817a9982e477421544def52f75dd65e3809b136b7f881441c8567467bf7a",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://6755bbf5b462c6938f9a057c87e129f2d379d6faa261d00ae8c4c85e2d26d60c",
+				"dweb:/ipfs/Qmek3u6dix5EpWAn7idQnmdcPZ9zPiSrJkTuuAyPog4qeG"
 			]
 		},
 		"localhost/contracts/utility/interfaces/IOwned.sol": {

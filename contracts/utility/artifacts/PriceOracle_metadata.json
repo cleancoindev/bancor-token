@@ -1,0 +1,189 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_prevOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnerUpdate",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "acceptOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "manualPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "newOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "setManualPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"acceptOwnership()": {
+					"details": "used by a new owner to accept an ownership transfer"
+				},
+				"transferOwnership(address)": {
+					"details": "allows transferring the contract ownership the new owner still needs to accept the transfer can only be called by the contract owner",
+					"params": {
+						"_newOwner": "new contract owner"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/utility/PriceOracle.sol": "PriceOracle"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/utility/Owned.sol": {
+			"keccak256": "0x938909a4f77a5e5ed9593ff946baa64b91adaa4245c3ab08f78b1dfbadbd87f5",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://970aa9b3cb8408e15d1baa0f4fc2350caa61d9a825c5b28faa5bfdd8d9932a8a",
+				"dweb:/ipfs/QmVTtcidpEQUHBQmmUwMjmSXGM32uKHJkKLyi5euWMJh4X"
+			]
+		},
+		"localhost/contracts/utility/PriceOracle.sol": {
+			"keccak256": "0xe661d4a3f87aced7dbb57cebeeead54305938c1997e73fd4859d947aa68c030f",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://3b9f757ba387cc7892d50ef529a0f8c9779f13dfa8466ef87e8ddedc18fc386c",
+				"dweb:/ipfs/QmbbiFY2LgitUeFdxMfkQqBNAqNA616uDMXjgidawe2meT"
+			]
+		},
+		"localhost/contracts/utility/interfaces/IOracle.sol": {
+			"keccak256": "0x1734817a9982e477421544def52f75dd65e3809b136b7f881441c8567467bf7a",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://6755bbf5b462c6938f9a057c87e129f2d379d6faa261d00ae8c4c85e2d26d60c",
+				"dweb:/ipfs/Qmek3u6dix5EpWAn7idQnmdcPZ9zPiSrJkTuuAyPog4qeG"
+			]
+		},
+		"localhost/contracts/utility/interfaces/IOwned.sol": {
+			"keccak256": "0x3ed39ee6056a8f87de85efb18bcd649d560d6b1515fc3a7fda17c2cdc9f39df8",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://493d7581be76dff6fba2824626bc1b615e4d2860c17721894db7b27bec23fbef",
+				"dweb:/ipfs/QmNgBQPkzM5x4Z3Xj9wNQd1d6PPLw6gx9h1FPbGbqiWhyi"
+			]
+		}
+	},
+	"version": 1
+}
