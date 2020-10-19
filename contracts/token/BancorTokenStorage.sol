@@ -22,10 +22,15 @@ contract BancorTokenStorage is Owned, Utils{
   uint32 public  conversionFee = 0; //手续费
 
 
-  //投票相关字段
+  //私募，投票相关字段
+  bool public privateEnable = false; //私募是否开始
+
+  //开启私募时设置以下参数
+  uint256 public privateStartBlock; //私募开启时的块数
+  uint32 public privatePeriodBlock; // 私募周期
   uint32 public votePeriodBlock; //投票周期
   uint32 public voteOpposeRate; //投票反对百分比 1-100
-  uint32 public expectPrivateReserveToken; //预期私募Token
+  uint256 public expectPrivateReserveToken; //预期私募Token
 
   struct Vote {
        uint256 beginBlock; //投票开始块数
@@ -44,6 +49,12 @@ contract BancorTokenStorage is Owned, Utils{
         require(initialize, "ERR_NOT_INITIALIZED");
         _;
   }
+
+  modifier initializedAndPrivateEnabled() {
+        require(initialize && privateEnable, "ERR_NOT_INITIALIZED_AND_ENABLE");
+        _;
+  }
+
 
   modifier cmOnly(){
     require(msg.sender == contractManager, "ERR_ACCESS_DENIED_ONLY_CM");
@@ -102,7 +113,7 @@ contract BancorTokenStorage is Owned, Utils{
  /**
    设置预期私募Token数
  */
-  function setExpectPrivateReserveToken(uint32 _expectPrivateReserveToken) public cmOnly greaterThanZero(_expectPrivateReserveToken) {
+  function setExpectPrivateReserveToken(uint256 _expectPrivateReserveToken) public cmOnly greaterThanZero(_expectPrivateReserveToken) {
       expectPrivateReserveToken = _expectPrivateReserveToken;
   }
 

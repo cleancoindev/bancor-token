@@ -26,8 +26,7 @@ interface IOwned {
 // File: contracts/utility/Owned.sol
 
 
-pragma solidity 0.6.12;
-
+pragma solidity 0.6.12;
 
 
 contract Owned is IOwned {

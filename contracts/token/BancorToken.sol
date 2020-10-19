@@ -53,28 +53,47 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
         6. 投票反对百分比
         7. 预期募集Token数量
      */
-    function init(address _cm, address _fm, address _oracle, address _bancorFormula, uint32 _votePeriodblock, uint32 _voteOpposeRate, uint32 _expectPrivateReserveToken) public ownerOnly {
+    function init(address _cm, address _fm, address _oracle, address _bancorFormula) public protected ownerOnly {
         require(!initialize, "ERR_HAS_INIT");
-        require(_voteOpposeRate >= 1 && _voteOpposeRate <= 100, "ERR_OPPOES_RATE");
 
         _validAddress(_cm);
         _validAddress(_fm);
         _validAddress(_oracle);
         _validAddress(_bancorFormula);
-        _greaterThanZero(_votePeriodblock);
-        _greaterThanZero(_voteOpposeRate);
-        _greaterThanZero(_expectPrivateReserveToken);
+
+        initialize = true;
 
         contractManager = _cm;
         financialManager = _fm;
         oracleAddress = _oracle;
         bancorFormula = _bancorFormula;
+    }
+
+
+    /**
+      开启私募:
+        1. 私募募集周期
+        2. 投票周期
+        3. 投票反对百分比
+        4. 预期募集Token数量
+     */
+
+     function startPrivatePlacement(uint32 _privatePeriodBlock,
+                                    uint32 _votePeriodblock,
+                                    uint32 _voteOpposeRate,
+                                    uint256 _expectPrivateReserveToken) public protected initialized cmOnly {
+        require(!privateEnable, "ERR_PRIVATE_ENABLED");
+        require(_voteOpposeRate >= 1 && _voteOpposeRate <= 100, "ERR_OPPOES_RATE");
+
+        privateEnable = true;
+        privateStartBlock = block.number;
+        privatePeriodBlock = _privatePeriodBlock;
         votePeriodBlock = _votePeriodblock;
         voteOpposeRate = _voteOpposeRate;
         expectPrivateReserveToken = _expectPrivateReserveToken;
+     }
 
-        initialize = true;
-    }
+
 
     /**
        转账
@@ -145,7 +164,8 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
       1. 用户首先先授权给bancorToken指定_amount金额
       2. 调用bancorToken.issueByBancor方法发行token
      */
-    function issueByBancor(uint256 _usdt) public initialized override returns(bool) {
+    function issueByBancor(uint256 _usdt) public initializedAndPrivateEnabled override returns(bool) {
+        require(reserveBalance() < expectPrivateReserveToken, "ERR_PRIVATE_EXCEPT_LIMIT_TOKEN");
         require(IERC20Token(reserveToken).balanceOf(msg.sender) >= _usdt, "ERR_NOT_ENOUGH_TOKEN");
         require(IERC20Token(reserveToken).allowance(msg.sender, address(this)) >= _usdt, "ERR_NOT_ENOUGH_APPROVE");
 
@@ -206,12 +226,14 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
             1. 募集金额 >= 预期金额
             2. 上一次投票已公示
      */
-    function createVote() public protected initialized cmOnly {
-        require(reserveBalance() >= expectPrivateReserveToken, "ERR_NOT_ENGOUGH_BALANCE");
-        if(currentVoteId > 1){
-            require(voteDetail[currentVoteId-1].publicity, "ERR_LAST_VOTE_NOT_PUBLICITY");
+    function createVote() public protected initializedAndPrivateEnabled cmOnly {
+        require(block.number > privateStartBlock.add(privatePeriodBlock), "ERR_NOT_CREATE_VOTE");
+
+        if(currentVoteId >= 1){
+            require(voteDetail[currentVoteId].publicity, "ERR_LAST_VOTE_NOT_PUBLICITY");
         }
-        require(voteDetail[currentVoteId].beginBlock == 0, "ERR_VOTE_BEGIN");
+
+        require(voteDetail[currentVoteId+1].beginBlock == 0, "ERR_VOTE_BEGIN");
 
         currentVoteId = currentVoteId + 1;
         voteDetail[currentVoteId] = Vote(block.number, block.number + votePeriodBlock, 0, false, false);
@@ -225,7 +247,7 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
             1. 投票已结束
             2. 投票未公示
      */
-    function publicizeVote() public protected initialized cmOnly {
+    function publicizeVote() public protected initializedAndPrivateEnabled cmOnly {
        require(currentVoteId >= 1, "ERR_VOTE_NOT_START");
        require(block.number >  voteDetail[currentVoteId].endBlock, "ERR_VOTE_NOT_END");
        require(!voteDetail[currentVoteId].publicity, "ERR_VOTE_PUBLICITIED");
@@ -238,6 +260,7 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
        uint256 balance = reserveBalance();
        if(pass){
            require(IERC20Token(reserveToken).transfer(financialManager, balance), "ERR_TRANSFER_FAILED");
+           privateEnable = false;
        }
        vote.pass = pass;
        emit VotePublicize(block.number, currentVoteId, pass, balance);
@@ -249,13 +272,15 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
            1. 投票已开启
            2. 投票未结束
      */
-    function opposeVote() public initialized {
+    function opposeVote() public initializedAndPrivateEnabled {
         require(currentVoteId >= 1, "ERR_VOTE_NOT_START");
+        require(!voteDetail[currentVoteId].publicity, "ERR_VOTE_PUBLICITIED");
         require(block.number <=  voteDetail[currentVoteId].endBlock, "ERR_VOTE_END");
         require(voteList[currentVoteId][msg.sender] == 0 , "ERR_HAS_VOTED");
 
-        voteList[currentVoteId][msg.sender] = balanceOf[msg.sender];
-        voteDetail[currentVoteId].totalOppose = voteDetail[currentVoteId].totalOppose.add(balanceOf[msg.sender]);
+        uint256 _balance = balanceOf[msg.sender];
+        voteList[currentVoteId][msg.sender] = _balance;
+        voteDetail[currentVoteId].totalOppose = voteDetail[currentVoteId].totalOppose.add(_balance);
     }
 
 
@@ -266,14 +291,16 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
            2. 投票未结束
            3. 持币人已投票
      */
-    function undoOpposeVote() public initialized {
+    function undoOpposeVote() public initializedAndPrivateEnabled {
         require(currentVoteId >= 1, "ERR_VOTE_NOT_START");
+        require(!voteDetail[currentVoteId].publicity, "ERR_VOTE_PUBLICITIED");
         require(block.number <=  voteDetail[currentVoteId].endBlock, "ERR_VOTE_END");
         require(voteList[currentVoteId][msg.sender] > 0 , "ERR_NOT_VOTED");
 
-        uint256 voted = voteList[currentVoteId][msg.sender];
+
+        uint256 _balance = voteList[currentVoteId][msg.sender];
         voteList[currentVoteId][msg.sender] = 0;
-        voteDetail[currentVoteId].totalOppose = voteDetail[currentVoteId].totalOppose.sub(voted);
+        voteDetail[currentVoteId].totalOppose = voteDetail[currentVoteId].totalOppose.sub(_balance);
     }
 
 

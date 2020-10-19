@@ -28,49 +28,41 @@ const weight = 5000;
 //BancorToken init
 const contactManager = "0xe45217628722E522AdA72A2597cE8D8714395074";
 const finacalManager = "0xe45217628722E522AdA72A2597cE8D8714395074";
+
+
+//BancorToken startPrivatePlacement
+const privatePeriodBlock = 800000;
 const votePeriodblock = 2000;
 const voteOpposeRate = 75;
 const expectPrivateReserveToken = 1000;
 
 
-module.exports = function (deployer, network, accounts) {
+module.exports = async function (deployer, network, accounts) {
 
   const fromAccount = accounts[0];
+  let options = {
+    from: fromAccount
+  };
 
-  return deployer.deploy(BancorFormula, {
-      from: fromAccount
-    }).then(() => {
-      return deployer.deploy(PriceOracle, {
-        from: fromAccount
-      })
-    })
-    .then(_oracle => {
-      _oracle.setManualPrice(oraclePrice, {
-        from: fromAccount
-      });
-    })
-    .then(() => {
+  await deployer.deploy(BancorFormula, options);
 
-      return deployer.deploy(MockUSDTToken, "USDT", "USDT", 18, mockUSDTSupply, {
-        from: fromAccount
-      });
+  await deployer.deploy(PriceOracle, options);
 
-    })
-    .then(() => {
+  let _oracle = await PriceOracle.deployed();
+  await _oracle.setManualPrice(oraclePrice, options);
 
-      if (network === "kovan") {
-        usdtAddress = MockUSDTToken.address;
-      }
+  await deployer.deploy(MockUSDTToken, "USDT", "USDT", 18, mockUSDTSupply, options);
 
-      return deployer.deploy(BancorToken, name, symbol, decimals, totalSupply, usdtAddress, weight, {
-        from: fromAccount
-      });
-    })
-    .then(_bancorToken => {
-      _bancorToken.init(contactManager, finacalManager, PriceOracle.address, BancorFormula.address, votePeriodblock, voteOpposeRate, expectPrivateReserveToken, {
-        from: fromAccount
-      });
-    }).then(() => {
-      console.log("success");
-    });
+  if (network === "kovan") {
+    usdtAddress = MockUSDTToken.address;
+  }
+
+  await deployer.deploy(BancorToken, name, symbol, decimals, totalSupply, usdtAddress, weight, options);
+
+  let _bancorToken = await BancorToken.deployed();
+
+  await _bancorToken.init(contactManager, finacalManager, PriceOracle.address, BancorFormula.address, options);
+
+  await _bancorToken.startPrivatePlacement(privatePeriodBlock, votePeriodblock, voteOpposeRate, expectPrivateReserveToken, options);
+
 };
