@@ -63,6 +63,6 @@ module.exports = async function (deployer, network, accounts) {
 
   await _bancorToken.init(contactManager, finacalManager, PriceOracle.address, BancorFormula.address, options);
 
-  await _bancorToken.startPrivatePlacement(privatePeriodBlock, votePeriodblock, voteOpposeRate, expectPrivateReserveToken, options);
+  await _bancorToken.startPrivatePlacement(privatePeriodBlock, votePeriodblock, voteOpposeRate, expectPrivateReserveToken, weight, options);
 
 };
