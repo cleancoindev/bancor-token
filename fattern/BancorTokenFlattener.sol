@@ -465,21 +465,26 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
         2. 投票周期
         3. 投票反对百分比
         4. 预期募集Token数量
+        5. CW
      */
 
      function startPrivatePlacement(uint32 _privatePeriodBlock,
                                     uint32 _votePeriodblock,
                                     uint32 _voteOpposeRate,
-                                    uint256 _expectPrivateReserveToken) public protected initialized cmOnly {
+                                    uint256 _expectPrivateReserveToken,
+                                    uint32 _weight) public protected initialized cmOnly {
         require(!privateEnable, "ERR_PRIVATE_ENABLED");
         require(_voteOpposeRate >= 1 && _voteOpposeRate <= 100, "ERR_OPPOES_RATE");
+        require(_weight >= 1 && _weight <= 1000000, "ERR_RESERVE_WEIGHT");
 
         privateEnable = true;
+
         privateStartBlock = block.number;
         privatePeriodBlock = _privatePeriodBlock;
         votePeriodBlock = _votePeriodblock;
         voteOpposeRate = _voteOpposeRate;
         expectPrivateReserveToken = _expectPrivateReserveToken;
+        conversionWeight = _weight;
      }
 
 
