@@ -1,0 +1,84 @@
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+Starting migrations...
+======================
+> Network name:    'kovan'
+> Network id:      42
+> Block gas limit: 12500000 (0xbebc20)
+
+
+1_deploy_contracts.js
+=====================
+
+   Replacing 'BancorFormula'
+   -------------------------
+   > transaction hash:    0x54ffec15659e70ac9228260481be63575674ef31e7a062cdc43542223c962a7f
+   > Blocks: 1            Seconds: 6
+   > contract address:    0xEFF3Acc2EEDfcb2bDA2f8c57308E0552B010cbB0
+   > block number:        21783277
+   > block timestamp:     1603969668
+   > account:             0xe45217628722E522AdA72A2597cE8D8714395074
+   > balance:             3.20574065036340124
+   > gas used:            3366793 (0x335f89)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.006733586 ETH
+
+
+   Replacing 'PriceOracle'
+   -----------------------
+   > transaction hash:    0x9049fbb51841b159b2af7c20a89f28e356295a32bdcf0f50c985db8ea6502b71
+   > Blocks: 1            Seconds: 5
+   > contract address:    0x2eC176165C2b56799A98A5C414B131d8811D30Cb
+   > block number:        21783281
+   > block timestamp:     1603969684
+   > account:             0xe45217628722E522AdA72A2597cE8D8714395074
+   > balance:             3.20525147236340124
+   > gas used:            244589 (0x3bb6d)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000489178 ETH
+
+
+   Replacing 'ERC20Token'
+   ----------------------
+   > transaction hash:    0x0f9227a6be05c086d922e5317a782219607a2b5a9b3c845fa2a226d905b8a25b
+   > Blocks: 2            Seconds: 9
+   > contract address:    0xC82cEce2c0dea0f3b1654922B6fd24783892E659
+   > block number:        21783287
+   > block timestamp:     1603969712
+   > account:             0xe45217628722E522AdA72A2597cE8D8714395074
+   > balance:             3.20407263036340124
+   > gas used:            547060 (0x858f4)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00109412 ETH
+
+
+   Replacing 'BancorToken'
+   -----------------------
+   > transaction hash:    0xf16302495c87a17109c68188ca3d624186a86cd5de8fb93743bc10c052056a4c
+   > Blocks: 1            Seconds: 5
+   > contract address:    0x2CC08856aEa5cf5ad892260AfCfa3CEE1F87Ab0E
+   > block number:        21783290
+   > block timestamp:     1603969724
+   > account:             0xe45217628722E522AdA72A2597cE8D8714395074
+   > balance:             3.19905745436340124
+   > gas used:            2507588 (0x264344)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.005015176 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.01333206 ETH
+
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.01333206 ETH
