@@ -199,14 +199,14 @@ contract BancorToken is IBancorToken,BancorTokenStorage , ReentrancyGuard{
 
        uint256 amount = 0;
        uint256 oraclePrice = IOracle(oracleAddress).getPrice();
-       uint256 reserveBalance = reserveBalance();
+       uint256 _reserveBalance = reserveBalance();
 
-       if(totalSupply == 0 || reserveBalance == 0){
+       if(totalSupply == 0 || _reserveBalance == 0){
            amount = _amount.mul(PPM_CW).div(conversionWeight);
        }else{
            amount = IBancorFormula(bancorFormula).purchaseTargetAmount(
             totalSupply,
-            reserveBalance,
+            _reserveBalance,
             conversionWeight,
             _amount
         );
